@@ -1,0 +1,21 @@
+MRI Image Reconstruction
+The challenge should be completed using Python and any relevant libraries you need.
+Get the dataset at this link. The dataset contains 973 HDF files with k-space MRI data. Each .h5 file contains the following:
+- kspace: Emulated single-coil k-space data. The shape of the kspace tensor is (number of slices, height, width).
+- reconstruction_rss: The root-sum-of-squares reconstruction of the multi-coil k-space that was used to derive the emulated single-coil k-space cropped to the center 320 x 320 region. The shape of the reconstruction tensor is (number of slices, 320, 320).
+- reconstruction_esc: The inverse Fourier transform of the single-coil k-space data cropped to the center 320 x 320 region. The shape of the reconstruction tensor is (number of slices, 320, 320).
+
+We’d like to create a model that can reconstruct the images from an undersampled k-space.
+1. Load an example k-space data and produce an MRI image
+2. Create a GRAPPA-style sampling mask that densely samples in the center while subsampling outer k-space regions based on a provided undersampling factor. The function should have two parameters: the fraction of the data to keep from the centre, and the undersampling factor
+3. Use the sampling mask to generate k-space data that keeps 5% of the data from the centre, while undersampled the rest by a factor of 8,
+4. Produce images of the subsampled data and compare to the originals
+5. Train a deep-learning network to reconstruct the full quality images. You may use one of the methods described in this paper or any other of your choosing. Please explain your choices in a few sentences.
+6. Report a statistical measure of the success, as well your subjective impression
+7. Create a Python script called ‘train.py’ that will train the model and report the performance
+8. Create a repository on Github for your solution. The repository should contain everything necessary to run the code.
+    1. The train script
+    2. A readme.md explaining your solution (a notebook would also be acceptable)
+    3. Environment definition: a requirements.txt, environment.yml, or dockerfile
+    4. Do not include the data file in your repository, simply indicate where the file should go in your project folder
+9. If you had more time, what would you do to improve the performance of this algorithm?
